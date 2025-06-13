@@ -3,7 +3,7 @@ FROM openjdk:17-alpine
 # Set the working directory in the container
 WORKDIR /app
 # Copy the application JAR file
-COPY target/easytopup-0.0.1-SNAPSHOT.jar app.jar
+COPY target/hitpay-0.0.1-SNAPSHOT.jar app.jar
 # Expose the port that the application runs on
 EXPOSE 8085
 # Set environment variables (these should be provided via docker-compose)
