@@ -38,9 +38,10 @@ public class PaymentService {
 
     public void handlePayment(Map<String, Object> payload, Transaction transaction) {
 
-        logger.info("Handling PaymentSuccess event");
         try {
             String transactionId = (String) payload.get("id");
+            String createdAt = (String) payload.get("created_at");
+            String updatedAt = (String) payload.get("updated_at");
             String customerId = (String) payload.get("customer_id");
             String status = (String) payload.get("status");
             String currency = (String) payload.get("currency");
@@ -65,7 +66,6 @@ public class PaymentService {
             HttpResponse<String> response = Unirest.get(url+"/"+payment_request_id)
                     .header("X-BUSINESS-API-KEY", apiKey)
                     .asString();
-            System.out.println(response.getBody());
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(response.getBody());
@@ -81,6 +81,8 @@ public class PaymentService {
             transaction.setAmount(amount);
             transaction.setMethod(method);
             transaction.setPaymentStatus(paymentStatus);
+            transaction.setCreated_at(createdAt);
+            transaction.setUpdated_at(updatedAt);
             transaction.setStatus(status);
             transaction.setPaymentRequestId(payment_request_id);
             if (!referenceNode.isMissingNode() && !referenceNode.isNull()) {

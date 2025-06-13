@@ -18,6 +18,26 @@ public class Transaction {
     private String paymentStatus;
     private String method;
 
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    private String created_at;
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    private String updated_at;
+
     @Column(name = "reference_number")
     private String referenceNumber;
 
@@ -37,6 +57,8 @@ public class Transaction {
         if (transaction != null) {
             this.id = transaction.getId();
             this.transactionId = transaction.getTransactionId();
+            this.created_at = transaction.getCreated_at();
+            this.updated_at = transaction.getUpdated_at();
             this.customerId = transaction.getCustomerId();
             this.name = transaction.getName();
             this.email = transaction.getEmail();
